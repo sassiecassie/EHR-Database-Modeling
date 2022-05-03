@@ -1,0 +1,3 @@
+all files from performing :
+mysqldump cassandrapalmer tablename > tablename_dump.sql
+scp from odin to personal
