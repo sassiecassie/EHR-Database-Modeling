@@ -1,0 +1,47 @@
+﻿Table,Attribute Category,Attribute Name,Data Type,Description,Notes
+admissions_mimicIII,patient ID,subject_id,bigint,unique patient ID,manner to identify an individual person; big int to connect to other databases
+admissions_mimicIII,hospital stay ID,hosp_stay_id,bigint,unique hospital stay ID,manner to identify distinct hospital visits relating to one subject ID; big int to connect to other databases
+admissions_mimicIII,admission time,admit_time,varchar,admission time 24 hr,not used in master tables due to data discrepancies
+admissions_mimicIII,discharge time,disch_time,varchar,discharge time 24 hr,not used in master tables due to data discrepancies
+admissions_mimicIII,discharge date,disch_year,int,discharge year; scaled,not used in master tables due to data discrepancies
+admissions_mimicIII,ethnicity,ethnicity,varchar,ethnicity,patient ethnicity/race
+admissions_mimicIII,diagnosis,diagnosis,varchar,diagnosis description,diagnosis description based on hospital stay ID
+diagnoses_mimicIII,patient ID,subject_id,int,unique patient ID,manner to identify an individual person; int was original from mimicIII data
+diagnoses_mimicIII,hospital stay ID,hosp_stay_id,int,unique hospital stay ID,manner to identify distinct hospital visits relating to one subject ID
+diagnoses_mimicIII,icd 9 code,icd9code,varchar,diagnosis code,inconsistent schema between mimicIII and eICU; mapped to icd9diagnoses table
+patients_mimicIII,patient ID,subject_id,bigint,unique patient ID,manner to identify an individual person; big int to connect to other databases
+patients_mimicIII,gender,gender,varchar,gender,patient gender
+patients_mimicIII,age,age,varchar,year of birth; scaled,not used in master tables due to data discrepancies
+procedures_mimicIII,patient ID,subject_id,int,unique patient ID,manner to identify an individual person; int was original from mimicIII data
+procedures_mimicIII,hospital stay ID,hosp_stay_id,int,unique hospital stay ID,manner to identify distinct hospital visits relating to one patient ID
+procedures_mimicIII,icd 9 code,icd9code,varchar,procedure code,inconsistent schema between mimicIII and eICU; mapped to icd9procedures table
+person_mimicIV,patient ID,person_id,bigint,unique patient ID,manner to identify an individual person; big int to connect to other databases
+person_mimicIV,gender,gender,varchar,gender,patient gender
+person_mimicIV,ethnicity,ethnicity,varchar,ethnicity,patient ethnicity/race
+person_mimicIV,age,age,varchar ,year of birth; scaled,not used in master tables due to data discrepancies
+procedure_ids_mimicIV,procedure description,procedure_description,varchar,procedure description,not icd9 compliant; maps to master table
+procedure_ids_mimicIV,procedure code,procedure_id,bigint,procedure code,not icd9 compliant; maps to master table; maps to procedure_occurrences_mimicIV
+procedure_occurrences_mimicIV,patient ID,person_id,bigint,unique patient ID,manner to identify an individual person; big int to connect to other databases
+procedure_occurrences_mimicIV,procedure code,procedure_id,bigint,procedure code,not icd9 compliant; maps to master table; maps to procedure_ids_mimicIV
+visit_detail_mimicIV,hospital stay ID,visit_detail_id,bigint,unique hospital stay ID,manner to identify distinct hospital visits relating to one patient ID; big int to connect to other databases; other source tables were not consistent in attribute use
+visit_detail_mimicIV,patient ID,person_id,bigint,unique patient ID,manner to identify an individual person; big int to connect to other databases
+visit_detail_mimicIV,admission time,visit_detail_start_time,varchar,admission time 24 hr,not used in master tables due to data discrepancies
+visit_detail_mimicIV,discharge time,visit_detail_end_year,varchar,discharge year; scaled,not used in master tables due to data discrepancies
+visit_detail_mimicIV,discharge date,visit_detail_end_time,varchar,discharge time 24 hr,not used in master tables due to data discrepancies
+diagnosis_eICU,hospital stay ID,patient_unit_stay_id,int,unique hospital stay ID,manner to identify distinct hospital visits relating to one patient ID
+diagnosis_eICU,diagnosis description,description,varchar,diagnosis description,manner to identify an individual person; int was original from eICU data
+diagnosis_eICU,icd 9 code,icd9code,varchar,diagnosis code,inconsistent schema between mimicIII and eICU; used diagnosis_eICU.descriptiion instead of icd9diagnoses table
+patient_eICU,hospital stay ID,patient_unit_stay_id,int,unique hospital stay ID,manner to identify distinct hospital visits relating to one patient ID
+patient_eICU,patient ID,patient_health_system_stay_id,int,unique patient ID,manner to identify an individual person; int was original from eICU data
+patient_eICU,gender,gender,varchar,gender,patient gender
+patient_eICU,age,age,varchar,patient age in years,patient age in years; discrepancies between sources; not used in master tables
+patient_eICU,ethnicity,ethnicity,varchar,ethnicity,patient ethnicity/race
+patient_eICU,admission time,hospital_admit_time,varchar,admission time 24 hr,not used in master tables due to data discrepancies
+patient_eICU,discharge date,hospital_disch_year,int,discharge year,not used in master tables due to data discrepancies
+patient_eICU,discharge time,hospital_disch_time,varchar,discharge time 24 hr,not used in master tables due to data discrepancies
+treatment_eICU,hospital stay ID,patient_unit_stay_id,int,unique hospital stay ID,manner to identify distinct hospital visits relating to one patient ID
+treatment_eICU,procedure description,treatment_description,varchar,treatments received in stay,description of treatments received in hospital stay; used as procedure_description in master tables
+icd9diagnoses,icd 9 code,icd9code,varchar,diagnosis code,inconsistent schema between mimicIII and eICU; used in master table for mimicIII patients
+icd9diagnoses,diagnosis description,description,varchar,diagnosis description,inconsistent schema between mimicIII and eICU; used in master table for mimicIII patients
+icd9procedures,icd 9 code,icd9code,varchar,procedure code,inconsistent schema between mimicIII and eICU; used in master table for mimicIII patients
+icd9procedures,procedure description,description,varchar,procedure description,inconsistent schema between mimicIII and eICU; used in master table for mimicIII patients
